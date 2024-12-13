@@ -1,0 +1,26 @@
+{
+  "name": "inventory_system",
+  "version": "1.0.0",
+  "description": "The inventory system for NSSD.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon --env-file=.env app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "ldap-authentication": "^3.2.4",
+    "mongoose": "^8.8.2",
+    "morgan": "^1.10.0",
+    "workerpool": "^9.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

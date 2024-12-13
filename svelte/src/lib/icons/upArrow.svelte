@@ -1,0 +1,1 @@
+<span class="font-bold text-black">&#8593;</span>

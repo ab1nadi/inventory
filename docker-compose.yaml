@@ -1,0 +1,66 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: inventory
+    ports:
+      - "27017:27017"  # MongoDB default port
+    volumes:
+      - ./mongodb_data:/data/db
+
+  api:
+    image: node:slim
+    container_name: inventory-backend
+    working_dir: /usr/src/app
+    volumes:
+      - ./node_api:/usr/src/app  
+    ports:
+      - "4000:4000"  
+    command: >
+      sh -c "npm install && npm run dev"
+    profiles:
+      - macos
+    depends_on:
+      - mongodb
+
+  api-windows:
+    container_name: api-windows
+    build:
+      context: .
+      dockerfile: Dockerfile.node_api.windows
+    ports:
+      - "4000:4000" 
+    profiles:
+      - windows 
+    depends_on:
+      - mongodb
+
+  front-end:
+    # Profile-specific image configuration
+    container_name: inventory-front-end
+    working_dir: /usr/src/app
+    volumes:
+      - ./svelte:/usr/src/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - mongodb
+    profiles:
+      - macos
+    # Default configuration for macOS
+    image: node:slim  # For macOS, use the slim Node image (current state)
+
+  front-end-windows:
+    # Windows-specific front-end configuration
+    container_name: inventory-front-end-windows
+    build:
+      context: .
+      dockerfile: Dockerfile.svelte.windows
+    ports:
+      - "5173:5173"
+    depends_on:
+      - mongodb
+    profiles:
+      - windows
+    # Windows-specific image configuration (svelte image)
+    image: sveltejs/kit  # Change to Svelte-specific image for Windows

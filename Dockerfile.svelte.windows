@@ -1,0 +1,18 @@
+# Use the official Node.js slim image as the base image
+FROM node:slim
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy the entire Svelte app (after installing dependencies)
+COPY ./svelte .
+
+# Install the dependencies
+RUN npm install
+
+
+# Expose the port for the app to be accessible
+EXPOSE 5173
+
+# Start the development server using the command specified in the docker-compose
+CMD ["sh", "-c", "npm run dev"]
