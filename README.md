@@ -1,5 +1,5 @@
 # Build and install
-File io appears too slow on windows, so I had to make a profile that creates docker images for the front-end and node api.
+File io appears to be too slow on windows, so I had to make a profile that creates docker images for the front-end and node api.
 - Make sure ports 4000 and 5173 are open.
 ### Running On Macos 
 ```
